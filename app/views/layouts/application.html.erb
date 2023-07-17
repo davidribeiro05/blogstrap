@@ -13,8 +13,10 @@
   </head>
 
   <body>
-    <main class="container">
       <%= render 'layouts/topnavbar' %>
+
+    <main class="container">
+      <%= render 'layouts/flash_messages' %>
 
       <%= yield %>
     </main>
