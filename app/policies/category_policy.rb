@@ -1,14 +1,14 @@
 class CategoryPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      raise Pundit::NotAuthorizedError unless user&.admin?
+      raise Pundit::NotAuthorizedError unless user&.admin? || user&.has_role?(:moderator)
 
       scope.all
     end
   end
 
   def index?
-    user&.admin?
+    condition?
   end
 
   def create?
@@ -20,12 +20,12 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def destroy?
-    condition?
+    user.admin?
   end
 
   private
 
   def condition?
-    user.admin?
+    user&.admin? || user&.has_role?(:moderator)
   end
 end

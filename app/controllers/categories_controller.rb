@@ -14,9 +14,7 @@ class CategoriesController < ApplicationController
   end
 
   # GET /categories/1/edit
-  def edit
-    verify_if_user_is_authorized
-  end
+  def edit; end
 
   # POST /categories or /categories.json
   def create
@@ -49,8 +47,6 @@ class CategoriesController < ApplicationController
 
   # DELETE /categories/1 or /categories/1.json
   def destroy
-    verify_if_user_is_authorized
-
     respond_to do |format|
       if @category.destroy
         format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
@@ -66,6 +62,7 @@ class CategoriesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_category
     @category = Category.find(params[:id])
+    verify_if_user_is_authorized
   end
 
   # Only allow a list of trusted parameters through.
