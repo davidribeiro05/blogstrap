@@ -23,7 +23,7 @@ gem 'rolify', '~> 6.0'
 gem 'sass-rails', '>= 6'
 gem 'simple_form', '~> 5.1'
 gem 'turbolinks', '~> 5'
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker', '~> 5.0'
 
 group :development do

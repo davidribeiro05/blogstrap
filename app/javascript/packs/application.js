@@ -9,9 +9,8 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import { Tooltip, Toast, Popover } from 'bootstrap'
-import 'bootstrap/dist/js/bootstrap'
-import "bootstrap/dist/css/bootstrap";
+import { Tooltip, Toast, Popover, Dropdown } from 'bootstrap'
+import '../stylesheets/application';
 
 // If you're using Turbolinks. Otherwise simply use: jQuery(function () {
 document.addEventListener("turbolinks:load", () => {
@@ -24,6 +23,11 @@ document.addEventListener("turbolinks:load", () => {
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new Popover(popoverTriggerEl)
+    })
+
+    var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+    var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+      return new Dropdown(dropdownToggleEl)
     })
 })
 
