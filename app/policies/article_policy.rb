@@ -9,11 +9,21 @@ class ArticlePolicy < ApplicationPolicy
     true
   end
 
+  def create?
+    user&.id
+  end
+
   def update?
-    user.id == record.user.id
+    condition?
   end
 
   def destroy?
-    user.id == record.user.id
+    condition?
+  end
+
+  private
+
+  def condition?
+    user&.id == record.user.id
   end
 end

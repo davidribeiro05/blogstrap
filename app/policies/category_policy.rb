@@ -7,6 +7,10 @@ class CategoryPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    user&.admin?
+  end
+
   def create?
     condition?
   end
