@@ -1,17 +1,14 @@
 <article class="blog-post">
     <h2 class="display-5 link-body-emphasis mb-1"><%= article.title %></h2>
     
-    <p class="blog-post-meta">
-        <%= month_day_comma_year(article.created_at) %>
-        <a href="#"><%= article.user.email %></a>
-    </p>
+    <%= render 'article_detail', article: article %>
 
     <p><%= link_to 'Continue reading ...', article, class: 'btn btn-link' %></p>
     
     <p><%= truncate(article.body, length: 150) %></p>
 
     <%= link_to 'Edit', edit_article_path(article), 
-        class: 'btn btn-secondary' if policy(article).update? %></li>
+        class: 'btn btn-primary' if policy(article).update? %></li>
     <%= link_to 'Destroy', article_path(article),
             method: :delete,
             data: { confirm: 'Are you sure?' },

@@ -1,16 +1,27 @@
+require_relative '../repositories/article_repository'
+
 class ArticlesController < ApplicationController
+  include Paginable
+
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_article, only: %i[show edit update destroy]
 
+  def initialize
+    super
+    @repo = ArticleRepository.new
+  end
+
   def index
-    @highlights = Article.desc_order_by_created_at.first(3)
+    @categories = Category.sorted
+
+    category_id = params[:category]
+    @highlights = @repo.find_articles_by_category(category_id, 3)
+
     highlights_id = @highlights.pluck(:id).join(',')
 
-    current_page = (params[:page] || 1).to_i
-
-    @articles = Article.without_highlights(highlights_id)
-                       .desc_order_by_created_at
-                       .page(current_page)
+    @articles = @repo.articles_without_highlits(
+      highlights_id, category_id, current_page
+    )
   end
 
   def show; end
